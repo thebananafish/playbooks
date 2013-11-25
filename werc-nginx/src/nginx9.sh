@@ -1,6 +1,6 @@
 #!/bin/bash
-cp src/werc /etc/nginx/sites-available
-ln -s /etc/nginx/sites-available /etc/nginx/sites-enabled/
+cp src/werc /etc/nginx/sites-available/
+ln -s /etc/nginx/sites-available/werc /etc/nginx/sites-enabled/
 rm /etc/nginx/sites-enabled/default
 
 HOSTNAME=`hostname -f`
