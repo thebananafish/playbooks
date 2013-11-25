@@ -1,0 +1,40 @@
+---
+- hosts: all
+  connection: local
+  user: root
+  
+  tasks:
+
+  - name: update apt sources fisrt
+    apt: update_cache=yes
+
+  - name: Install necessities and nice-to-haves
+    apt: pkg=$item state=installed
+    with_items:
+      - build-essential 
+      - mercurial
+      - nginx-full
+      - libx11-dev
+      - libxtst-dev
+      - libxt-dev
+      - libtext-markdown-perl
+      - imagemagick
+      - wget
+      - fcgiwrap
+
+  - name: build pla9port with local script 
+    command: bash ./src/build9.sh
+
+  - name: get werc data
+    command: hg clone http://hg.cat-v.org/werc/ /var/
+
+  - name: setup werc and nginx with local script
+    command: bash ./src/nginx9.sh
+
+  - name: start fcgi for werc
+    command:  spawn-fcgi -a 127.0.0.1 -p 9001 -f /usr/sbin/fcgiwrap 
+
+  - name: make sure nginx is running
+    service: name=nginx state=running
+
+
