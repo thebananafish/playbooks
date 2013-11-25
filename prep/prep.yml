@@ -1,0 +1,40 @@
+---
+- hosts: all
+  connection: local
+  user: root
+  
+  tasks:
+
+  - name: update apt sources fisrt
+    apt: update_cache=yes
+
+  - name: Install necessities and nice-to-haves
+    apt: pkg=$item state=installed
+    with_items:
+      - vim
+      - nano
+      - screen
+      - tmux
+      - git
+      - mercurial
+      - htop
+      - puppet
+      - mosh
+      - postfix
+      - syslog-ng
+      - debian-goodies
+
+  - name: copy puppet config to puppet folder
+    copy: src=./src/puppet.conf dest=/etc/puppet/
+            owner=root group=root mode=0644
+
+  - name: copy defaults config for puppet
+    copy: src=./src/puppet dest=/etc/default/
+            owner=root group=root mode=0644
+
+  - name: initiate puppet - run puppetca --list (and sign) on the puppet server
+    command: puppetd --test --waitforcert 60
+
+  - name: make sure puppet is running
+    service: name=puppet state=running
+
