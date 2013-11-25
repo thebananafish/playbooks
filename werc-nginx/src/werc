@@ -20,8 +20,8 @@
         fastcgi_param  CONTENT_TYPE       $content_type;
         fastcgi_param  CONTENT_LENGTH     $content_length;
 
-        #fastcgi_param  SCRIPT_FILENAME   /var/www/werc/bin/werc.rc;
-        fastcgi_param  SCRIPT_NAME        /var/www/werc/bin/werc.rc;
+        #fastcgi_param  SCRIPT_FILENAME   /var/werc/bin/werc.rc;
+        fastcgi_param  SCRIPT_NAME        /var/werc/bin/werc.rc;
         #fastcgi_param  SCRIPT_NAME        $fastcgi_script_name;
 
         fastcgi_param  REQUEST_URI        $request_uri;
