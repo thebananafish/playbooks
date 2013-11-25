@@ -26,7 +26,7 @@
     command: bash ./src/build9.sh
 
   - name: get werc data
-    command: hg clone http://hg.cat-v.org/werc/ /var/
+    command: hg clone http://hg.cat-v.org/werc/ /var/werc
 
   - name: setup werc and nginx with local script
     command: bash ./src/nginx9.sh
