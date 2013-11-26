@@ -1,0 +1,23 @@
+<VirtualHost *>
+    RewriteEngine On
+    AddHandler cgi-script .rc
+    AddHandler cgi-script .cgi
+    <Directory /var/werc/bin>
+        Options ExecCGI
+        AllowOverride None
+        Order allow,deny
+        Allow from all
+    </Directory>
+    <IfModule mod_dir.c>
+        DirectoryIndex /werc.rc
+    </IfModule>
+
+    RewriteRule (.*) /var/werc/sites/%{HTTP_HOST}/$1
+
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule .* /usr/werc/bin/werc.rc
+
+    RewriteRule /werc.rc /usr/werc/bin/werc.rc
+    DocumentRoot /var/werc/bin/
+    ErrorDocument 404 /werc.rc
+</VirtualHost
