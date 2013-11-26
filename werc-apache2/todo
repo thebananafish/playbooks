@@ -1,2 +1,0 @@
-enable rewrite engine and restart apache
-correct werc config from /usr/werc to /var/werc

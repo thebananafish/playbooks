@@ -31,7 +31,6 @@
   - name: setup werc and apache with local script
     command: bash ./src/apache9.sh
 
-  - name: make sure apache is running
-    service: name=apache2 state=running
-
+  - name: restart apache and good to go!
+    action: service name=apache2 state=restarted
 
