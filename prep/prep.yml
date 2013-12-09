@@ -32,8 +32,8 @@
     copy: src=./src/puppet dest=/etc/default/
             owner=root group=root mode=0644
 
-  - name: initiate puppet - run puppetca --list (and sign) on the puppet server
-    command: puppetd --test --waitforcert 60
+  - name: initiate puppet - run puppetca --list (and sign) on the puppet server if new server (already been on puppet) run puppet cert clean 
+    command: puppetd --test --waitforcert 60 && true
 
   - name: make sure puppet is running
     service: name=puppet state=running
