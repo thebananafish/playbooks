@@ -1,0 +1,10 @@
+- hosts: apt-servers
+  become: true
+  tasks:
+   - name: updates a server
+     apt: update_cache=yes
+   - name: upgrade a server
+     apt: upgrade=dist
+   - name: Check if a reboot is required
+     register: file
+     stat: path=/var/run/reboot-required get_md5=no

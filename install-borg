@@ -1,0 +1,16 @@
+- hosts: apt-servers
+  become: true
+  tasks:
+   - name: download borgbackup release 1.0.10
+     get_url:
+       url: https://github.com/borgbackup/borg/releases/download/1.0.10/borg-linux64
+       dest: /usr/local/bin
+       mode: 0755
+
+   - name: stat borg
+     stat: path=/usr/local/bin/borg-linux64
+     register: borg_stat
+
+   - name: rename to just borg
+     command: mv /usr/local/bin/borg-linux64 /usr/local/bin/borg
+     when: borg_stat.stat.exists
